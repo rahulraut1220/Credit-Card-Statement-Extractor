@@ -1,0 +1,146 @@
+<!-- templates/upload.html -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CC Statement Extractor</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 40px auto;
+        max-width: 900px;
+        background: #f4f6f8;
+        color: #333;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 28px;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .card {
+        background: #fff;
+        padding: 20px 25px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      input[type="file"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fdfdfd;
+        cursor: pointer;
+        width: 80%;
+        max-width: 400px;
+      }
+      button {
+        background: #0078d7;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+      }
+      button:hover {
+        background: #005ea3;
+        transform: translateY(-1px);
+      }
+      small {
+        display: block;
+        margin-top: 8px;
+        color: #555;
+        font-style: italic;
+        text-align: center;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+      strong {
+        color: #2c3e50;
+      }
+      .downloads a {
+        display: inline-block;
+        margin: 6px 8px 6px 0;
+        padding: 8px 14px;
+        background: #e9f3ff;
+        color: #0366d6;
+        text-decoration: none;
+        border-radius: 5px;
+        border: 1px solid #cfe3ff;
+        transition: background 0.3s ease;
+      }
+      .downloads a:hover {
+        background: #d0e7ff;
+      }
+      pre {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 6px;
+        overflow: auto;
+        font-size: 14px;
+        border: 1px solid #ddd;
+      }
+      h2, h3 {
+        color: #2c3e50;
+        margin-top: 0;
+      }
+      .notes {
+        background: #fff;
+        border-radius: 10px;
+        padding: 15px 20px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      }
+      code {
+        background: #f1f1f1;
+        padding: 3px 5px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>💳 Credit Card Statement Extractor</h1>
+
+    <div class="card">
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/pdf" required>
+        <button type="submit">Upload &amp; Parse</button>
+      </form>
+      <small>Outputs are saved under the server's <code>output/</code> folder and can be downloaded below.</small>
+    </div>
+
+    {% if result %}
+      <div class="card">
+        <h2>📄 Extracted Summary</h2>
+        <ul>
+          <li><strong>Card (last4):</strong> {{ result.card_last4 }}</li>
+          <li><strong>Statement date:</strong> {{ result.statement_date }}</li>
+          <li><strong>Billing period:</strong> {{ result.billing_period }}</li>
+          <li><strong>Due date:</strong> {{ result.due_date }}</li>
+          <li><strong>Total balance:</strong> {{ result.total_balance }}</li>
+        </ul>
+
+        <h3>⬇️ Downloads</h3>
+        <div class="downloads">
+          <a href="{{ downloads.full_json }}">Full JSON (result_full.json)</a>
+          <a href="{{ downloads.tx_csv }}">Transactions CSV (transactions_full.csv)</a>
+          <a href="{{ downloads.minimal_json }}">Minimal JSON (result_minimal.json)</a>
+        </div>
+      </div>
+    {% endif %}
+  </body>
+</html>
