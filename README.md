@@ -54,18 +54,6 @@ A lightweight Flask application that automatically extracts key fields and trans
 
 ### Windows
 
-1. **Install Tesseract OCR:**
-
-   - Download from [GitHub](https://github.com/tesseract-ocr/tesseract)
-   - Run the installer
-   - Or use Chocolatey: `choco install tesseract`
-
-2. **Install Poppler:**
-
-   - Download binaries from [oschwartz10612/poppler-windows](https://github.com/oschwartz10612/poppler-windows)
-   - Add the `bin/` folder to your system PATH
-   - Or use Chocolatey: `choco install poppler`
-
 3. **Set up Python environment (PowerShell):**
 
    ```powershell
