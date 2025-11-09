@@ -84,26 +84,6 @@ A lightweight Flask application that automatically extracts key fields and trans
 
    Open your browser and navigate to `http://localhost:5000`
 
-### 🐳 Docker (Optional)
-
-For a containerized setup:
-
-1. **Build the Docker image:**
-
-   ```bash
-   docker build -t cc-extractor .
-   ```
-
-2. **Run the container:**
-
-   ```bash
-   docker run -p 5000:5000 cc-extractor
-   ```
-
-3. **Access the app:**
-
-   Open your browser and navigate to `http://localhost:5000`
-
 ## 📁 Project Structure
 
 ```
